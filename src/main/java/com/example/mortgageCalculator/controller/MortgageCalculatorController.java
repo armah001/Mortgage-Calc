@@ -25,21 +25,21 @@ public class MortgageCalculatorController {
         return mortgageCalculatorService.calculateMortgage(loanInformation);
     }
 
-    @PostMapping("/initiatePayment")
-    public ResponseEntity<String> initiatePayment(@RequestBody LoanInformation loanInformation, String customerEmail){
-        // Assuming loanInformation contains necessary details like amount and customerId
-        double monthlyPaymentAmount = loanInformation.getMonthlyPayment();
-        // Call Paystack service to initiate payment
-        PaystackTransactionResponse response = paystackService.initiatePayment(monthlyPaymentAmount, customerEmail);
-
-        // Handle the response from Paystack
-        if (response.isSuccess()) {
-            // Payment initiated successfully, update your application state accordingly
-            return ResponseEntity.ok("Payment initiated successfully");
-        } else {
-            // Payment initiation failed, provide appropriate feedback
-            return ResponseEntity.badRequest().body("Payment initiation failed: " + response.getMessage());
-        }
-    }
+//    @PostMapping("/initiatePayment")
+//    public ResponseEntity<String> initiatePayment(@RequestBody LoanInformation loanInformation, String customerEmail){
+//        // Assuming loanInformation contains necessary details like amount and customerId
+//        double monthlyPaymentAmount = loanInformation.getMonthlyPayment();
+//        // Call Paystack service to initiate payment
+//        PaystackTransactionResponse response = paystackService.initiatePayment(monthlyPaymentAmount, customerEmail);
+//
+//        // Handle the response from Paystack
+//        if (response.isSuccess()) {
+//            // Payment initiated successfully, update your application state accordingly
+//            return ResponseEntity.ok("Payment initiated successfully");
+//        } else {
+//            // Payment initiation failed, provide appropriate feedback
+//            return ResponseEntity.badRequest().body("Payment initiation failed: " + response.getMessage());
+//        }
+//    }
 
 }
