@@ -13,7 +13,7 @@ import org.springframework.web.client.RestTemplate;
 public class PaystackService {
 
     private final String paystackApiUrl = "https://api.paystack.co/transaction/initialize";
-    private final String apiKey = " ";
+    private final String apiKey = "   ";
 
     public PaystackTransactionResponse initiatePayment(double amount, String customerId) {
         // Set up the request headers
