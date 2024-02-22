@@ -21,17 +21,17 @@ jobs:
     - name: Login to docker hub
       run: docker login -u "${{secrets.DOCKER_USERNAME}}" -p "${{secrets.DOCKER_PASSWORD}}"
     - name: Build Docker Image
-      run: docker build -t mortgagecalc/spring-boot-docker .
+      run: docker build -t mortgagecalc-spring-boot-docker .
     - name: Publish image to docker hub
-      run: docker push mortgagecalc/spring-boot-docker:latest
+      run: docker push mortgagecalc-spring-boot-docker:latest
 
   deploy:
     needs: build
     runs-on: [aws-ec2]
     steps:
       - name: Pull Image from docker hub
-        run: docker pull mortgagecalc/spring-boot-docker:latest
+        run: docker pull mortgagecalc-spring-boot-docker:latest
       - name: Delete old container
         run: docker rm -f mortgagecalc-container
       - name: Runn docker container
-        run: docker run -d -p 8080:8080 --name mortgagecalc-container mortgagecalc/spring-boot-docker
+        run: docker run -d -p 8080:8080 --name mortgagecalc-container mortgagecalc-spring-boot-docker
