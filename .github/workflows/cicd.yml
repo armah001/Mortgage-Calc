@@ -35,3 +35,4 @@ jobs:
         run: docker rm -f mortgagecalc-container
       - name: Run docker container
         run: docker run -d -p 8080:8080 --name mortgagecalc-container armah001/mortgagecalc-spring-boot-docker
+
