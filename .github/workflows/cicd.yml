@@ -26,14 +26,16 @@ jobs:
           docker tag armah/mortgagecalc-spring-boot-docker:latest armah/mortgagecalc-spring-boot-docker:tagname
 
     - name: Publish image to docker hub
-      run: docker push armah/mortgagecalc-spring-boot-docker:latest
+      run: |
+        docker push armah/mortgagecalc-spring-boot-docker:latest
+        docker push armah/mortgagecalc-spring-boot-docker:tagname
 
   deploy:
     needs: build
     runs-on: [aws-ec2]
     steps:
       - name: Pull Image from docker hub
-        run: docker pull armah/mortgagecalc-spring-boot-docker:latest
+        run: docker pull armah/mortgagecalc-spring-boot-docker:tagname
       - name: Delete old container
         run: docker rm -f mortgagecalc-container
       - name: Run docker container
