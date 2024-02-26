@@ -23,10 +23,7 @@ jobs:
     - name: Build Docker Image and Create Container
       run: |
           docker build -t armah/mortgagecalc-spring-boot-docker .
-          docker tag armah/mortgagecalc-spring-boot-docker:latest armah/mortgagecalc-spring-boot-docker:first-image
           docker push armah/mortgagecalc-spring-boot-docker:first-image
-          docker create --name mortgagecalc-container armah/mortgagecalc-spring-boot-docker:first-image
-          docker start mortgagecalc-container
           
     - name: Publish image to docker hub
       run: |
