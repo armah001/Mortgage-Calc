@@ -31,12 +31,16 @@ jobs:
 
   deploy:
     needs: build
-    runs-on: [aws-ec2]
+    runs-on: ubuntu-latest
     steps:
-      - name: Pull Image from docker hub
-        run: docker pull armah001/mortgage:latest
-      - name: Delete old container
-        run: docker rm -f mortgagecalc-container
-      - name: Run docker container
-        run: docker run -d -p 8080:8080 --name mortgagecalc-container armah001/mortgage:latest
+      - name: SSH On Instance
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            docker pull ${{ secrets.DOCKER_IMAGE}}
+            docker rm -f mortgage
+            docker run -p 8080:8080 --name mortgage --restart=on-failure -d ${{ secrets.DOCKER_IMAGE }}
 
