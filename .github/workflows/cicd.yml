@@ -22,12 +22,12 @@ jobs:
       run: docker login -u "${{secrets.DOCKER_USERNAME}}" -p "${{secrets.DOCKER_PASSWORD}}"
     - name: Build Docker Image and Create Container
       run: |
-          docker build -t armah001/mortgage:latest .
-          docker push armah001/mortgage:latest
+          docker build -t ${{ secrets.DOCKER_IMAGE }} .
+          docker push ${{ secrets.DOCKER_IMAGE }}
           
     - name: Publish image to docker hub
       run: |
-        docker pull armah001/mortgage:latest
+        docker pull ${{ secrets.DOCKER_IMAGE }}
 
   deploy:
     needs: build
